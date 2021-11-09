@@ -1,5 +1,6 @@
 <?php
     session_start();
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,13 +8,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Récapitulatif des produits</title>
 </head>
 <body>
     <?php
+     include "menu.php";
+    ?>
+    <?php
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
             echo "<p>Aucun produit en session...</p>";
         }else{
+            
+            
             echo "<table>",
                     "<thead>",
                         "<tr>",
@@ -35,11 +42,14 @@
                         "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                      "</tr>";
                 $totalGeneral += $product['total'];
+                
+                
             }
             echo     "<tr>",
                         "<td colspan=4>Total général : </td>",
                         "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
                      "</tr>",
+
                 "</tbody>",
                 "</table>";      
         }
