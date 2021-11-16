@@ -1,10 +1,13 @@
-<?php
-    $nb = 0;
-        foreach($_SESSION['products'] as $index => $product){
-            $nb += $product['qtt'];
-        }
-?>
+
+    
     <nav>
-        <a class="panier" href="recap.php"><img src='img/panier.jpg' alt="panier"><p class='rouge'><?=$nb?></p></a>
-        <a href="index.php">Acceuil</a>  
+        <div class="shopping-basket">
+            <a class="panier" href="recap.php"><i class="fas fa-shopping-cart fa-3x"></i></a>
+            <p class='nb-product'><?= getFullQtt() ?></p>
+        </div>
+        <div class="home">
+            <a href="index.php">Acceuil</a>  
+        </div>
+        
     </nav>
+<?= getMessage() ?>
