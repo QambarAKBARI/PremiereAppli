@@ -15,9 +15,17 @@
             case "addProd":
                 if(isset($_POST['submit'])){
 
-                    $name= filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
-                    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-                    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
+                    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+                    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, [
+                            "options" => [
+                                "min_range" => 0
+                            ],
+                            "flags" => FILTER_FLAG_ALLOW_FRACTION
+                        ]);
+                    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT, [
+                            "options" =>[
+                                "min_range" => 1
+                            ]]);
             
                     if($name && $price && $qtt){
             
@@ -73,9 +81,6 @@
                 if(isset($_SESSION['products'][$id])){
                     $name = $_SESSION['products'][$id]["name"];//récupère le nom du produit qui va être supprimé
                     unset($_SESSION['products'][$id]);//on le supprime
-                    /*------ACHTUNG------*/
-                    $_SESSION["products"] = array_values($_SESSION["products"]);//réattribue les index des produits restants
-                    /*----fin ACHTUNG----*/
                     setMessage("success", "Le produit $name a été supprimé !");
                 }
                 else setMessage("error", "Le produit n'existe pas !");

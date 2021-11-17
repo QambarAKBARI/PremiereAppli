@@ -44,11 +44,7 @@
                 <input class="submit" type="submit" name="submit" id="submit" value="Ajouter le produit">
             </p>
         </form>
-        <?php if(array_key_exists('errors', $_SESSION)): ?>
-            <div class="errors">
-                <?= $_SESSION['errors'];?>
-            </div>
-        <?php unset($_SESSION['errors']); endif; ?>    
+ 
     </section>
     
 

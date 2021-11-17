@@ -1,7 +1,12 @@
 *{
     box-sizing: border-box;
 }
+h1{
+    text-align: center;
+}
 nav{
+    max-width: 1024px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     padding: 1em 2em;
@@ -25,9 +30,8 @@ a{
 }
 #deleteBtn{
     float: right;
-    background-color: #FFBF86;
 }
-#formulaire, table{
+#formulaire{
     width: 400px;   
     margin: auto;
     background-color: cadetblue;
@@ -48,11 +52,8 @@ h1,label, th{
     padding: 0.4em;
 }
 
-table, #message, p{
+#message, p{
     text-align: center;
-}
-tr{
-    color: #FFBF86;
 }
 
 form{
@@ -76,6 +77,15 @@ form{
     background-color: rgb(134, 211, 255);
     color: rgb(23, 22, 78);
 }
+table{
+    text-align: center;
+    font-size: 1.5em;
+    background-color: #FFBF86;
+    border: solid 5px #544179;
+    border-collapse: collapse;
+    margin: auto;
+}
+
 #message{
     padding: 1em;
 }
@@ -84,3 +94,11 @@ form{
     margin: auto;
     border-radius: 5px;
 }
+td, th{
+    padding: 0.5em;
+    border: 1px solid #544179;
+}
+th{
+    padding: 0.5em 1.5em;
+}
+

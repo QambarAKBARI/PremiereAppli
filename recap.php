@@ -68,7 +68,7 @@ else{
             }
             ?>
             <tr>
-                <td colspan=3></td>
+                <td colspan=3>Total</td>
                 <td><?= getFullQtt() ?></td>
                 <td><strong><?= number_format($totalGeneral, 2, ",", "&nbsp;") ?>&nbsp;€</strong></td>
             </tr>
