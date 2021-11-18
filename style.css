@@ -1,11 +1,11 @@
 *{
     box-sizing: border-box;
 }
-h1{
+h1, h2{
     text-align: center;
 }
 nav{
-    max-width: 1024px;
+    max-width: 1200px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -17,8 +17,15 @@ a{
     text-decoration: none;
     color: #544179;
 }
+.admin{
+    display: inline-block;
+    margin-left: 1em;
+}
 .shopping-basket{
     order: 2;
+    display: flex;
+}
+.shopping-cart{
     position: relative;
 }
 .nb-product{
@@ -27,24 +34,23 @@ a{
     top: 50%;
     color: rgb(156, 21, 21);
     font-weight: 800;
+    font-size: 1.5em;
 }
 #deleteBtn{
     float: right;
 }
-#formulaire{
-    width: 400px;   
-    margin: auto;
-    background-color: cadetblue;
-    padding: 1em;
-    border-radius: 5px;
-}
-input, select{
+
+input, select, textarea{
     border-radius: 3px;
     background-color: rgb(241, 239, 229);
     border: 1px solid rgb(195, 228, 130);
     cursor: pointer;
+    font-size: 1.5em;
 }
-h1,label, th{
+label{
+    font-size: 1.3em;
+}
+h1, label, th{
     color: rgb(255, 243, 221);
 }
 .submit, input, .texte, select{
@@ -52,18 +58,28 @@ h1,label, th{
     padding: 0.4em;
 }
 
-#message, p{
+#message{
     text-align: center;
 }
 
 form{
+    width: 50vw;
     margin: auto;
     background-color: #FFBF86;
     padding: 1em;
     border-radius: 5px;
 }
-.formulaire{
-    width: 360px;
+
+form input, form textarea{
+    width: 100%;
+
+}
+#formulaire{
+    max-width: 1200px;
+    margin: auto;
+    background-color: cadetblue;
+    padding: 1em;
+    border-radius: 5px;
 }
 .success{
     background-color: rgb(129, 255, 157);
@@ -83,22 +99,45 @@ table{
     background-color: #FFBF86;
     border: solid 5px #544179;
     border-collapse: collapse;
+    width: 1200px;
     margin: auto;
 }
 
 #message{
     padding: 1em;
-}
-#message{
-    width: 400px;   
+    font-size: 1.5em;
+    width: 1200px;   
     margin: auto;
     border-radius: 5px;
 }
+
 td, th{
-    padding: 0.5em;
+    padding: 0.8em;
     border: 1px solid #544179;
 }
 th{
     padding: 0.5em 1.5em;
 }
-
+.container{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.product{
+    width: 300px;
+    height: 200px;
+    padding: 0.5em;
+    border: 0px solid brown;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    margin: -3px;
+}
+.product-info{
+    width: 70%;
+    margin: auto;
+    padding: 0.5em;
+    border: 2px solid brown;
+    text-align: center;
+    border-radius: 5px;
+}

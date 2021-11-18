@@ -1,6 +1,11 @@
 <?php
-    session_start();
-    include "function.php";
+session_start();
+include "db_functions.php";
+include "functions.php";
+$products = findAll();
+
+    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,45 +13,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
-    <title>Ajout produit</title>
+    <title>Document</title>
 </head>
 <body>
-<?php
-     include "menu.php";
-    ?>
-    <section id="formulaire">
-        <h1>Ajouter un produit</h1>
-        <form action="traitement.php?action=addProd" method="POST">
-            <p>
-                <label for="nom">
-                    Nom du produit :
-                    <input type="text" class="texte" name="name" id="name">
-                </label>
-            </p>
-            <p>
-                <label for="prix">
-                    Prix du produit :
-                    <input type="number" name="price" step="any" id="price">
-                </label>
-            </p>
-            <p>
-                <label for="nom">
-                    Quantité désirée :
-                    <input type="number" name="qtt" id="qtt" value="1">
-                </label>
-            </p>
-            <p>
-                <input class="submit" type="submit" name="submit" id="submit" value="Ajouter le produit">
-            </p>
-        </form>
- 
-    </section>
-    
+    <?php include "menu.php"; ?>
+    <div class="container">
+        
 
+        <?php
+            
+            foreach($products as $product){
+                ?>
+                <div class='product'>
+                    <h2>
+                        <a href="product.php?id=<?= $product['id'] ?>">
+                            <?= $product['name']?>
+                        </a>
+                    </h2>
+                    <p><?= substr($product['description'], 0, 50)?></p>
+                    <p><?= number_format($product['price'], 2, ",","&nbsp;")?>&nbsp;€</p>
+                    <a href="traitement.php?action=addProd&id=<?= $product['id'] ?>">Ajouter au panier</a>
+                </div>
+                <?php
+            }
+        ?>
+    </div>
 </body>
 </html>

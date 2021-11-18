@@ -1,51 +1,51 @@
 <?php
     session_start();
-    include "function.php";
+    include "functions.php";
+    include "db_functions.php";
 
     $action = filter_input(INPUT_GET, "action", FILTER_VALIDATE_REGEXP, [
         "options" => [
-            "regexp" => "/addProd|updateQtt|deleteProd|deleteAll/"
+            "regexp" => "/addDataBase|addProd|updateQtt|deleteProd|deleteAll/"
         ]
     ]);
 
     if($action){
 
         switch($action){
-            
-            case "addProd":
+            case "addDataBase":
                 if(isset($_POST['submit'])){
 
-                    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+                    $name= filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
                     $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, [
-                            "options" => [
-                                "min_range" => 0
-                            ],
-                            "flags" => FILTER_FLAG_ALLOW_FRACTION
-                        ]);
-                    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT, [
-                            "options" =>[
-                                "min_range" => 1
-                            ]]);
+                        "options" => [
+                            "min_range" => 0
+                        ],
+                        "flags" => FILTER_FLAG_ALLOW_FRACTION
+                    ]);
+                    $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
             
-                    if($name && $price && $qtt){
-            
-                        $product = [
-                            "name"  => $name,
-                            "price" => $price,
-                            "qtt"   => $qtt,
-                        ];
-            
-                        $_SESSION['products'][] = $product;
-                        
-                        setMessage("success", "Produit $name ajouté avec succès !$qtt:fois");
-                    }
-                    else{
-                        setMessage("notice", "Vérifiez les données du formulaire !");
+                    if($name && $price && $description){
+                        if($id = insertProduct($name, $description, $price)){
+                            setMessage("success", "Produit $name ajouté avec succès !"); 
+                            redirect("product.php?id=$id");
+                        }else{
+                            setMessage("notice", "Vérifiez les données du formulaire !");
+                        }
                     }
                 }
                 else{
-                    setMessage("error", "Sale pirate, tu valides le formulaire STP !");
+                    setMessage("error", "Sale pirate de ta maman, tu valides le formulaire STP !");
                 }
+               
+                break;
+
+            case "addProd":
+                $product = findOneById($_GET['id']);
+                $product['qtt'] = 1;
+                $_SESSION['products'][]= $product;
+
+                setMessage('success', 'le produit a été ajouté ');
+
                 redirect("index.php");
                 break;
 
