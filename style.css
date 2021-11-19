@@ -28,6 +28,9 @@ a{
 .shopping-cart{
     position: relative;
 }
+.btn-supprime{
+    margin-right: 1em;
+}
 .nb-product{
     position: absolute;
     right: 32%;
@@ -131,7 +134,7 @@ th{
     border: 0px solid brown;
     text-align: center;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    margin: -3px;
+    
 }
 .product-info{
     width: 70%;

@@ -2,7 +2,13 @@
 <?php
     include "db_functions.php";
     include "functions.php";
-    $product = findOneById($_GET['id']);
+    
+    $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+
+    if(!$id || !$product = findOneById($id)){
+        setMessage("error", "Le produit demandé n'existe pas...");
+        redirect("index.php");
+    }
 
 ?>
 

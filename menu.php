@@ -5,7 +5,7 @@
             <?php
                 
                 if(preg_match("/recap.php/", $_SERVER["REQUEST_URI"])){
-                    echo "<div><a href='traitement.php?action=deleteAll'><i class='fas fa-trash-alt fa-3x'></i></a></div>";
+                    echo "<div class='btn-supprime'><a href='traitement.php?action=deleteAll'><i class='fas fa-trash-alt fa-3x'></i></a></div>";
                 }
             ?>
             <div class="shopping-cart">

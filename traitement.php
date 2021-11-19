@@ -36,16 +36,37 @@
                 else{
                     setMessage("error", "Sale pirate de ta maman, tu valides le formulaire STP !");
                 }
-               
+                redirect("index.php");
                 break;
 
             case "addProd":
-                $product = findOneById($_GET['id']);
-                $product['qtt'] = 1;
-                $_SESSION['products'][]= $product;
+                $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+                
+                if($id){
+                    
+                    $prodInSession = array_filter($_SESSION["products"], function($prod) use($id){
+                        return $id == $prod["id"];
+                    });
 
-                setMessage('success', 'le produit a été ajouté ');
-
+                    if(empty($prodInSession)){
+                        if($product = findOneById($id)){
+                            $product["qtt"] = 1;
+                            $_SESSION["products"][] = $product;
+                            setMessage("success", "Produit ".$product["name"]." ajouté avec succès ! <a href='recap.php'>Voir le panier</a>");
+                        }
+                        else{
+                            setMessage("error", "Un problème est survenu avec la BDD, veuillez réessayer !");
+                        }
+                    }
+                    else{
+                        $key = key($prodInSession);
+                        $_SESSION["products"][$key]["qtt"]++;
+                        setMessage("success", "Produit ".$prodInSession[$key]["name"]." a vu sa quantité augmenter ! <a href='recap.php'>Voir le panier</a>");
+                    }
+                }
+                else{
+                    setMessage("error", "Un problème est survenu avec la requète, veuillez réessayer !");
+                }
                 redirect("index.php");
                 break;
 
