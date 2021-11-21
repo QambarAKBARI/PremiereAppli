@@ -14,7 +14,6 @@
         switch($action){
             case "addDataBase":
                 if(isset($_POST['submit'])){
-
                     $name= filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
                     $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, [
                         "options" => [
@@ -31,12 +30,12 @@
                         }else{
                             setMessage("notice", "Vérifiez les données du formulaire !");
                         }
-                    }
+                    }else setMessage("notice", "Vérifiez les données du formulaire !");
                 }
                 else{
-                    setMessage("error", "Sale pirate de ta maman, tu valides le formulaire STP !");
+                    setMessage("error", "Sale pirate, tu valides le formulaire STP !");
                 }
-                redirect("index.php");
+                redirect("admin.php");
                 break;
 
             case "addProd":
@@ -52,7 +51,7 @@
                         if($product = findOneById($id)){
                             $product["qtt"] = 1;
                             $_SESSION["products"][] = $product;
-                            setMessage("success", "Produit ".$product["name"]." ajouté avec succès ! <a href='recap.php'>Voir le panier</a>");
+                            setMessage("success", "Produit ".$product["name"]." ajouté avec succès !");
                         }
                         else{
                             setMessage("error", "Un problème est survenu avec la BDD, veuillez réessayer !");
@@ -61,7 +60,7 @@
                     else{
                         $key = key($prodInSession);
                         $_SESSION["products"][$key]["qtt"]++;
-                        setMessage("success", "Produit ".$prodInSession[$key]["name"]." a vu sa quantité augmenter ! <a href='recap.php'>Voir le panier</a>");
+                        setMessage("success", "Produit ".$prodInSession[$key]["name"]." a vu sa quantité augmenter !");
                     }
                 }
                 else{

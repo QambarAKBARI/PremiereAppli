@@ -31,6 +31,10 @@
         return $stmt->fetchAll();
     }
 
+    /**
+     * retourne le produit demandé de la base de données 
+     * @param int     $id l'id du produit 
+     */
     function findOneById($id){
         $db = connexion();
         $sql = "SELECT * FROM product WHERE id = :id ";
