@@ -27,10 +27,10 @@
             
                     if($name && $price && $description){
                         if($id = insertProduct($name, $description, $price)){
-                            setMessage("success", "Produit $name ajouté avec succès !"); 
+                            setMessage("success", "Produit $name ajouté avec succès en base de données !"); 
                             redirect("product.php?id=$id");
                         }else{
-                            setMessage("notice", "Vérifiez les données du formulaire !");
+                            setMessage("error", "Error de base de données !");
                         }
                     }else setMessage("notice", "Vérifiez les données du formulaire !");
                 }
@@ -38,11 +38,36 @@
                     setMessage("error", "Sale pirate, tu valides le formulaire STP !");
                 }
                 break;
-            case "updateProd" :
-                break;
-            case "deleteProd": 
 
-                break;
+                case "updateProd":
+                    if(isset($_POST['submit'])){
+                        $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+    
+                        $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+                        $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                        $descr = filter_input(INPUT_POST, "descr", FILTER_SANITIZE_STRING);
+    
+                        if($id && $name && $price && $descr){
+                            if(updateProduct($id, $name, $price, $descr)){
+                                setMessage("success", "Produit $name modifié en base de données !");
+                            }
+                            else setMessage("error", "Erreur de base de données !");
+                        }
+                        else setMessage("notice", "Vérifiez les données du formulaire !");
+                    }
+                    else setMessage("error", "Sale pirate, tu valides le formulaire STP !");
+    
+                    break;
+    
+                case "deleteProd": 
+                    $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+    
+                    if($id && deleteProduct($id)){
+                        setMessage("success", "Produit supprimé en base de données !");
+                    }
+                    else setMessage("error", "L'action n'a pas pu être effectuée !");
+                
+                    break;
 
         }
     }

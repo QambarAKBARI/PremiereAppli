@@ -48,7 +48,7 @@
                 </label>
             </p>
             <p>
-                <input class="submit" type="submit" name="submit" id="submit" value="Ajouter le produit">
+                <input class="submit" type="submit" name="submit" id="submit" value="Valider">
             </p>
         </form>
     </section>
@@ -65,6 +65,7 @@
             </thead>
             <tbody>
                 <?php
+               // var_dump($prodToUpdate);
                 foreach($products as $prod){
                 ?>
                 <tr>
@@ -74,7 +75,7 @@
                     <td><?= $prod["description"] ?></td>
                     <td>
                         <a href="admin.php?id=<?= $prod["id"] ?>"><i class="fas fa-tools fa-2x"></i></a> OU 
-                        <a href="db_traitement.php?action=deleteProd&id=<?= $prod["id"] ?>"><i class='fas fa-trash-alt fa-2x'></a>
+                        <a href="db_traitement.php?action=deleteProd&id=<?= $prod["id"] ?>" onclick="confirmDelete('<?= $prod['name'] ?>')"><i class='fas fa-trash-alt fa-2x'></a>
                     </td>
                 </tr>
                 <?php
@@ -83,7 +84,15 @@
             </tbody>
 
         </table>
+        <div id="modal">
+                <h1>ALERTE</h1>
+                <p>Vous allez supprimer le produit <span class="modal__name"></span>, confirmer ?</p>
+                <p id="modal-actions">
+                    <a class="modal-actions__confirm" href="">Confirmer</a>
+                    <a class="modal-actions__cancel" href="#">Annuler</a>
+                </p>
+        </div>
     
-
+        <script src="script.js"></script>
 </body>
 </html>

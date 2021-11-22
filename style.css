@@ -144,3 +144,19 @@ th{
     text-align: center;
     border-radius: 5px;
 }
+
+#modal{
+    display: none;
+    position: fixed;
+    width: 50vw;
+    top: 25vh;
+    left: 25vw;
+    background: red;
+    color: #fff;
+    padding: 1em;
+    box-shadow: 0 0 100px #000;
+}
+#modal-actions{
+    display: flex;
+    justify-content: space-around;
+}
