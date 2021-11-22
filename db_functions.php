@@ -64,3 +64,10 @@
         return $db->lastInsertId();
     }
 
+    function deleteProduct($id){
+        $db = connexion();
+        $sql = "DELETE FROM product WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+    }
