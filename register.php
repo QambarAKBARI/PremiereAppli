@@ -1,5 +1,6 @@
 <?php
-    
+    ob_start();
+    session_start();
 ?>
     <form action="security.php?action=register" method="post">
         <p>
@@ -30,3 +31,7 @@
             <input type="submit" name="submit" id="submit" value="Inscription">
         </p>
     </form>
+<?php
+$titre = "REGISTER";
+$result = ob_get_clean();
+require "template.php";

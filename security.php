@@ -1,7 +1,6 @@
 <?php
     session_start();
     include "functions.php";
-    include "db_functions.php";
     include "db_security.php";
 
     $action = filter_input(INPUT_GET, "action", FILTER_VALIDATE_REGEXP, [
@@ -14,6 +13,22 @@
 
         switch($action){
             case "login":
+                if(isset($_POST['submit'])){
+                    $credentials = filter_input(INPUT_POST, "credentials", FILTER_SANITIZE_STRING);
+                    $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_STRING);
+
+                    if($credentials && $password){
+                        if(($user = findByUsernameOrEmail($credentials, $credentials))
+                            && password_verify($password, $user['password'])){
+                                $_SESSION['user'] = $user;
+                                setMessage("success", "Bienvenue".$user['username']);
+                                redirect("index.php");
+                        }
+                        else setMessage("error", "Mauvais identifiants ou mot de passe, réessayez !");
+                    }
+                    else setMessage("error", "Tous les champs dovivent être remplis !");
+                }
+                redirect("login.php");
                 break;
             case "register":
                 
@@ -36,16 +51,22 @@
                         if($pass1 === $pass2){
                             if(!findByUsernameOrEmail($username, $email)){
                                 $hash = password_hash($pass1, PASSWORD_ARGON2ID);
-                                echo "gooo";
+                                if(insertUser($username, $email, $hash)){
+                                    echo "CA Y EST !!! T'es inscrit !!!";
+                                }
+                                else echo "error bdd";
                             }
-                        }else{
-                            echo "pas good";
-                        }
+                            else "no";
+                        }else echo "pas good";  
+                        
                     }
                 }
                 break;
 
             case "logout":
+                unset($_SESSION['user']);
+                setMessage("success", "A bientot");
+                redirect("login.php");
                 break;        
         }
     }

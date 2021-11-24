@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,8 @@
 </head>
     <body>
         <?php 
+            
+            include "functions.php";
             include "menu.php";
         ?>
         <div><?= $result?></div>
