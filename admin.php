@@ -22,7 +22,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title><?= $prodToUpdate ? "Modifier" : "Ajouter" ?> produit</title>
 </head>
 <body>
@@ -44,7 +44,7 @@
             </p>
             <p>
                 <label for="descr">Description du produit:
-                <textarea name="description" id="descr" cols="30" rows="10" value="<?= $prodToUpdate ? $prodToUpdate["description"] : "" ?>"></textarea>
+                <textarea name="description" id="descr" cols="30" rows="10"><?= $prodToUpdate ? $prodToUpdate["description"] : "" ?></textarea>
                 </label>
             </p>
             <p>
@@ -75,7 +75,7 @@
                     <td><?= $prod["description"] ?></td>
                     <td>
                         <a href="admin.php?id=<?= $prod["id"] ?>"><i class="fas fa-tools fa-2x"></i></a> OU 
-                        <a href="db_traitement.php?action=deleteProd&id=<?= $prod["id"] ?>" onclick="confirmDelete('<?= $prod['name'] ?>')"><i class='fas fa-trash-alt fa-2x'></a>
+                        <a href="db_traitement.php?action=deleteProd&id=<?= $prod["id"] ?>" onclick="confirmDelete('<?= $prod['name'] ?>')"><i class='fas fa-trash-alt fa-2x'></i></a>
                     </td>
                 </tr>
                 <?php
@@ -93,6 +93,6 @@
                 </p>
         </div>
     
-        <script src="script.js"></script>
+        <script src="js/script.js"></script>
 </body>
 </html>

@@ -5,7 +5,9 @@ function confirmDelete(prodname)
     const modal = document.querySelector("#modal")
     modal.style.display = "block"
 
-    let url = event.target.getAttribute("href") 
+    let url = event.target.parentNode.getAttribute("href") 
+
+    console.log(url)
     
     modal.querySelector(".modal-actions__confirm").setAttribute("href", url)
     modal.querySelector(".modal__name").innerText = prodname

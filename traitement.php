@@ -5,7 +5,7 @@
 
     $action = filter_input(INPUT_GET, "action", FILTER_VALIDATE_REGEXP, [
         "options" => [
-            "regexp" => "/addDataBase|updateQtt|deleteProd|deleteAll/"
+            "regexp" => "/addToCart|updateQtt|deleteProd|deleteAll/"
         ]
     ]);
 

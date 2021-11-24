@@ -45,7 +45,7 @@
     
                         $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
                         $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-                        $descr = filter_input(INPUT_POST, "descr", FILTER_SANITIZE_STRING);
+                        $descr = filter_input(INPUT_POST, "description", FILTER_SANITIZE_STRING);
     
                         if($id && $name && $price && $descr){
                             if(updateProduct($id, $name, $price, $descr)){
@@ -63,6 +63,7 @@
                     $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
     
                     if($id && deleteProduct($id)){
+                        
                         setMessage("success", "Produit supprimé en base de données !");
                     }
                     else setMessage("error", "L'action n'a pas pu être effectuée !");

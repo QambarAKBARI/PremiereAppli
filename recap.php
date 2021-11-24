@@ -1,20 +1,9 @@
 <?php
+    ob_start();
     session_start();
     include "functions.php";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="style.css">
         
-        <title>Récapitulatif des produits</title>
-    </head>
-    <body>
-        <?php include "menu.php"; ?>
-
         <?php
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
             ?>
@@ -70,6 +59,8 @@
             <?php
             }
         ?>
-        
-    </body>
-</html>
+<?php
+$titre = "Récapitulatif des produits";
+$result = ob_get_clean();
+require "template.php";
+?>

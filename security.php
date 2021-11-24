@@ -1,7 +1,7 @@
 <?php
     session_start();
     include "functions.php";
-    include "db-functions.php";
+    include "db_functions.php";
     include "db_security.php";
 
     $action = filter_input(INPUT_GET, "action", FILTER_VALIDATE_REGEXP, [
@@ -16,6 +16,7 @@
             case "login":
                 break;
             case "register":
+                
                 if(isset($_POST['submit'])){
                     $username = filter_input(INPUT_POST, "username", FILTER_VALIDATE_REGEXP, [
                         "options" => [
@@ -35,7 +36,7 @@
                         if($pass1 === $pass2){
                             if(!findByUsernameOrEmail($username, $email)){
                                 $hash = password_hash($pass1, PASSWORD_ARGON2ID);
-                                
+                                echo "gooo";
                             }
                         }else{
                             echo "pas good";
