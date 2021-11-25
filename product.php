@@ -2,7 +2,6 @@
 <?php
     ob_start();
     include "db_functions.php";
-    include "functions.php";
     
     $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 

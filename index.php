@@ -2,7 +2,6 @@
 ob_start();
 session_start();
 include "db_functions.php";
-include "functions.php";
 $products = findAll();
 
 ?>

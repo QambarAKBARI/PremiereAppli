@@ -1,9 +1,17 @@
 <?php
     ob_start();
     session_start();
-    include "functions.php";
+
+    function getFullQtt1(): int
+    {
+        if(isset($_SESSION['products']) && !empty($_SESSION['products'])){
+            return array_reduce($_SESSION["products"], function($acc, $prod){
+                return $acc + $prod["qtt"];
+            }, 0);
+        }
+        else return 0;
+    }
 ?>
-        
         <?php
         if(!isset($_SESSION['products']) || empty($_SESSION['products'])){
             ?>
@@ -49,7 +57,7 @@
                     ?>
                     <tr>
                         <td colspan=3>Total</td>
-                        <td><?= getFullQtt() ?></td>
+                        <td><?= getFullQtt1() ?></td>
                         <td><strong><?= number_format($totalGeneral, 2, ",", "&nbsp;") ?>&nbsp;€</strong></td>
                         <td><a href='traitement.php?action=deleteAll'><i class="fas fa-trash-alt fa-3x"></i></a></td>
                     </tr>

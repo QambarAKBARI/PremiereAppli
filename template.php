@@ -11,7 +11,6 @@
 </head>
     <body>
         <?php 
-            
             include "functions.php";
             include "menu.php";
         ?>

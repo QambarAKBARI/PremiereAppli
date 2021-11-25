@@ -21,7 +21,7 @@
                         if(($user = findByUsernameOrEmail($credentials, $credentials))
                             && password_verify($password, $user['password'])){
                                 $_SESSION['user'] = $user;
-                                setMessage("success", "Bienvenue".$user['username']);
+                                setMessage("success", "Bienvenue : ".$user['username']);
                                 redirect("index.php");
                         }
                         else setMessage("error", "Mauvais identifiants ou mot de passe, réessayez !");
@@ -52,15 +52,16 @@
                             if(!findByUsernameOrEmail($username, $email)){
                                 $hash = password_hash($pass1, PASSWORD_ARGON2ID);
                                 if(insertUser($username, $email, $hash)){
-                                    echo "CA Y EST !!! T'es inscrit !!!";
+                                    setMessage("success", "Vous êtes inscrit  !!");
+                                    redirect("login.php");
                                 }
-                                else echo "error bdd";
+                                else setMessage("error", "Error connexion BDD !!");
                             }
-                            else "no";
-                        }else echo "pas good";  
-                        
-                    }
+                            else setMessage("error", "Error connexion non établi avec BDD !!");
+                        }else setMessage("notice", "Veuillez insérer le mot de passe identique !!");  
+                    }else setMessage("notice", "Veuillez remplir tous les champs !!"); 
                 }
+                redirect("register.php");
                 break;
 
             case "logout":

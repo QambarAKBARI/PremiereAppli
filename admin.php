@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include "functions.php";
     include "db_functions.php";
+    include "functions.php";
 
     $products = findAll();
 
