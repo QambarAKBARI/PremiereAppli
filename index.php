@@ -1,31 +1,20 @@
-<?php
-ob_start();
-session_start();
-include "db_functions.php";
-$products = findAll();
+<?php //FRONT CONTROLLER
+require "vendor/autoload.php";
+require "config.php";//CONSTANTES DE l'APPLICATION
 
-?>
-    <div class="container">
-        <?php
-            
-            foreach($products as $product){
-                ?>
-                <div class='product'>
-                    <h2>
-                        <a href="product.php?id=<?= $product['id'] ?>">
-                            <?= $product['name']?>
-                        </a>
-                    </h2>
-                    <p><?= substr($product['description'], 0, 50)?></p>
-                    <p><?= number_format($product['price'], 2, ",","&nbsp;")?>&nbsp;€</p>
-                    <a href="traitement.php?action=addToCart&id=<?= $product['id'] ?>">Ajouter au panier</a>
-                </div>
-                <?php
-            }
-        ?>
-    </div>
-    <?php
-    $titre = "Tous les produits";
-    $result = ob_get_clean();
-    require "template.php";
-    ?>
+
+session_start();
+
+use App\Service\Router;
+use App\Service\Session;
+
+
+$response = Router::handleRequest();
+$page = $response !== false ? $response["view"] : Router::NOT_FOUND;
+
+ob_start();
+include($page);
+$content = ob_get_contents();
+ob_end_clean();
+
+require(VIEW_PATH."layout.php");

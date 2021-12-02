@@ -1,0 +1,17 @@
+{
+    "name": "qambar/store",
+    "description": "gestion d'un panier",
+    "type": "project",
+    "authors": [
+        {
+            "name": "QambarAKBARI",
+            "email": "qambarakbarifr@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
